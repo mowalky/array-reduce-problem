@@ -15,7 +15,22 @@ const arr2 = [
   ];
 
 function combineAll(...data) {
-  console.log(data);
+  // merge all arrays
+  const mergeArrays = [...data].flat();
+
+  const results = mergeArrays.reduce((acc, cur) => {
+    const keys = Object.keys(cur);
+    keys.forEach((key) => {
+      if (acc[key]) {
+        acc[key].push(cur[key]);
+      } else {
+        acc[key] = [cur[key]];
+      }
+    });
+    return acc;
+  }, {});
+
+  console.log(results);
 }
 
 combineAll(arr1, arr2);
